@@ -27,12 +27,7 @@ import lombok.NoArgsConstructor;
 		private String name;
 		
 		@Column(nullable = false)
-		private Number quotes;
-
-		public Stock save(Stock stock) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		private double quotes;		
 
 }
 

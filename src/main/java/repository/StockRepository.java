@@ -8,9 +8,6 @@ import model.Stock;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long>{
 	
-	static Stock findByName(String Name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	Stock findByName(String Name);	
 
 }

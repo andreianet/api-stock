@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,8 +32,7 @@ public class StockController {
 	private StockService stockService;
 	
 	
-	@GetMapping
-	@CrossOrigin
+	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Stock> list(){		
 		return stockRepository.findAll();
@@ -50,8 +48,8 @@ public class StockController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Stock create(@Validated @RequestBody Stock stock) {
-		return stockRepository.save(stock);
+	public Stock create(@RequestBody Stock stock) {
+		return stockService.salvar(stock);
 	}
 	
 	@PatchMapping(value="/{name}")
