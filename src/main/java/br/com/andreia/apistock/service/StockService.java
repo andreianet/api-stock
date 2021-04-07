@@ -15,6 +15,7 @@ public class StockService {
 	private StockRepository stockrepository;
 	
 	public Stock salvar(Stock stock){
+		stock.getQuotes().forEach(q -> q.setStock(stock));
 		return stockrepository.save(stock);
 	}
 	

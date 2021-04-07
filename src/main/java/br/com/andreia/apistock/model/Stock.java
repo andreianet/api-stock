@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,8 @@ import lombok.NoArgsConstructor;
 		
 		@Column(nullable = false)
 		//private double quotes;
-		@OneToMany(cascade = CascadeType.ALL, mappedBy = "stock")
-		@JoinColumn(name="stock_id")
+		@OneToMany(cascade = CascadeType.ALL, mappedBy = "stock", fetch = FetchType.EAGER)
+		//@JoinColumn(name="stock_id")
 		private List<stockHistory> quotes;
 
 }
