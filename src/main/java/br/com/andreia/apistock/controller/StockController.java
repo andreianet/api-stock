@@ -1,12 +1,12 @@
-package controller;
+package br.com.andreia.apistock.controller;
 
 import java.util.List;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Stock;
-import repository.StockRepository;
-import service.StockService;
+import br.com.andreia.apistock.repository.StockRepository;
+import br.com.andreia.apistock.service.StockService;
+import br.com.andreia.apistock.model.Stock;
 
 @RestController
-@RequestMapping("/stock")
 public class StockController {
 	
 	@Autowired
@@ -32,27 +31,28 @@ public class StockController {
 	private StockService stockService;
 	
 	
-	@GetMapping()
+	@GetMapping("/stock")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Stock> list(){		
 		return stockRepository.findAll();
 	}
 	
 	//select * from contact where id = ?
-	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<Stock> findById(@PathVariable long id){
-	  return stockRepository.findById(id)
+	@GetMapping(path = {"{idStock}"})
+	public ResponseEntity<Stock> search(@PathVariable Long idStock){
+	  return stockRepository.findById(idStock)
 	          .map(record -> ResponseEntity.ok().body(record))
 	          .orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping
+	//tentar realizar o post com stock e stockhistory
+	@PostMapping("/stock")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Stock create(@RequestBody Stock stock) {
 		return stockService.salvar(stock);
 	}
 	
-	@PatchMapping(value="/{name}")
+	@PatchMapping(value="/{name_stock}")
 	public ResponseEntity<Stock> update(@PathVariable("id") long id,
 	                                        @RequestBody Stock stock){
 	    return stockRepository.findById(id)
@@ -63,8 +63,8 @@ public class StockController {
 	        }).orElse(ResponseEntity.notFound().build());
 	}	  
 	
-	@DeleteMapping(path ={"/{id}"})	
-	public ResponseEntity<?> delete(@PathVariable ("id") Long Id){
+	@DeleteMapping(path ={"{id}"})	
+	public ResponseEntity<?> delete(@PathVariable ("id") long Id){
 		if(!stockRepository.existsById(Id)) {
 			return ResponseEntity.notFound().build();
 		}

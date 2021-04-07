@@ -1,4 +1,4 @@
-package exception;
+package br.com.andreia.apistock.exception;
 
 public class NegException extends RuntimeException{
 	

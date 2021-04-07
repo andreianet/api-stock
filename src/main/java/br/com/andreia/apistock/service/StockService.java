@@ -1,13 +1,12 @@
-package service;
+package br.com.andreia.apistock.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import exception.NegException;
-import model.Stock;
-import repository.StockRepository;
+import br.com.andreia.apistock.repository.StockRepository;
+import br.com.andreia.apistock.model.Stock;
 
 @Service
 public class StockService {

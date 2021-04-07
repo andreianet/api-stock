@@ -3,11 +3,11 @@ package br.com.andreia.apistock.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.andreia.apistock.model.Stock;
+
+import br.com.andreia.apistock.model.stockHistory;
 
 @Repository
-public interface StockRepository extends JpaRepository<Stock, Long>{
+public interface StockHistoryRepository extends JpaRepository<stockHistory, Long>{
 	
-	Stock findByName(String Name);	
 
 }
